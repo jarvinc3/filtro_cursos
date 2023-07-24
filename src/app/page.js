@@ -1,95 +1,51 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client'
+import { useState } from "react"
 
 export default function Home() {
+  const cursos = [
+    "Programación Full Stack",
+    "Inglés para Call Center",
+    "Aire Acondicionado",
+    "Java",
+    "Mecánica de motos",
+    "Asesor Comercial",
+    "Conectividad y Redes",
+    "Asesor Financiero",
+    "Auxiliar de Almacén y Logística",
+    "Mecánica de Motos",
+    "Marketing Digital",
+    "Visitador Médico",
+    "Farmacología",
+    "Asistente Administrativo",
+    "Mantenimiento y reparación de celulares, tablets y computadoras",
+    "Mantenimiento y reparación de aires acondicionados y electricidad básica",
+  ];
+
+  const [search, setSearch] = useState(cursos);
+
+  const handleSearch = (event) => {
+    let text = event.target.value.toLowerCase();
+    const filtered = [];
+
+    cursos.forEach((element) => {
+      if (element.toLowerCase().includes(text)) {
+        filtered.push(element);
+      }
+    });
+    
+    setSearch(filtered);
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+    <main>
+      <input type="text" onKeyUp={handleSearch} />
+      <ul>
+        {
+          search.map((elemento, i) => (
+            <li key={i}>{elemento}</li>
+          ))
+        }
+      </ul>
     </main>
   )
 }
